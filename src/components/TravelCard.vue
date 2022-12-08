@@ -7,12 +7,12 @@
 </template>
 
 <script>
-export default {
-  name: 'TravelCard',
-  props: {
-    card: String
-  }
-}
+    export default {
+        name: 'TravelCard',
+        props: {
+            card: Object
+        }
+    }
 </script>
 
 <style>

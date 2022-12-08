@@ -3,21 +3,31 @@
   <h1>Your upcoming destinations</h1>
   <div class="location-contain">
     <div class="locations">
-      <TravelCard v-for="location in locations" :key="location.name" :card="location">
-        
-      </TravelCard>
+      <TravelCard v-for="location in locations" :key="location.name" :card="location"></TravelCard>
     </div>
+    <h1>Welcome to Hotel California</h1>
+    <button @click="toggle">
+        <span v-if="isShowing">Hide</span>
+        <span v-else>Show</span>
+    </button>
+    <transition name="fade">
+      <modal v-if="isShowing">
+          <button @click="toggle">But You Can Never Leave!</button>
+      </modal>
+    </transition>
   </div>
 </div>
 </template>
 
 <script>
 import TravelCard from '@/components/TravelCard.vue';
+import modal from '@/components/modal.vue';
 
 export default {
   name: 'App',
   components: {
-    TravelCard
+    TravelCard,
+    modal
   },
   data() {
     return {
@@ -42,8 +52,15 @@ export default {
           img: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/paris2.svg',
           desc: `By the end of the 12th century, Paris had become the political, economic, religious, and cultural capital of France. Maurice de Sully undertook the construction of the Notre Dame Cathedral at its eastern extremity.`
         },
-      ]
+      ],
+      isShowing: false
     }
+  },
+  methods: {
+      toggle() {
+          this.isShowing = !this.isShowing;
+          console.log("clicking");
+      }
   }
 }
 </script>
@@ -91,5 +108,26 @@ h2 {
 }
 img {
   margin: 10px;
+}
+
+button {
+  background: none;
+  border: solid 1px;
+  border-radius: 2em;
+  font: inherit;
+  padding: 0.75em 2em;
+  color: #4fc08d;
+}
+
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  transition: opacity 0.25s ease-out;
+}
+
+.fade-leave-active {
+  transition: opacity 0.20s ease-in;
 }
 </style>
