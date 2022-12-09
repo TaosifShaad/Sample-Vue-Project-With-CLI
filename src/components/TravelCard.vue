@@ -11,6 +11,9 @@
         name: 'TravelCard',
         props: {
             card: Object
+        },
+        setup(props) {
+            console.log(props.card);
         }
     }
 </script>
